@@ -22,8 +22,9 @@ class MusicCard extends React.Component {
   }
 
   render() {
-    const { trackName, previewUrl, trackId } = this.props;
+    const { trackName, previewUrl, trackId, favoriteSongs } = this.props;
     const { loading } = this.state;
+    const isFavorite = favoriteSongs.find((fav) => fav.trackId === trackId);
     return (
       <div>
         { loading && <Loading />}
@@ -43,6 +44,7 @@ class MusicCard extends React.Component {
             id={ `checkbox-music-${trackId}` }
             data-testid={ `checkbox-music-${trackId}` }
             onChange={ () => this.handleChange(this.props) }
+            checked={ isFavorite }
           />
         </label>
       </div>
@@ -55,6 +57,8 @@ MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
+  // Solução para propType de array de objeto com várias chaves proveniente do LifeSaver (link: https://lifesaver.codes/answer/prop-type-object-if-forbidden-react-forbid-prop-types)
+  favoriteSongs: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.object)).isRequired,
 };
 
 export default MusicCard;

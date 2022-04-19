@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import Loading from './Loading';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor() {
@@ -11,10 +13,13 @@ class Album extends React.Component {
       music: [],
       artist: '',
       collection: '',
+      loading: true,
+      favoriteSongs: [],
     };
   }
 
   async componentDidMount() {
+    // Busca da informação do album selecionado
     const { match: { params: { id } } } = this.props;
     const objectMusic = await getMusics(id);
     const cd = (objectMusic.filter((_, index) => index === 0))[0];
@@ -24,16 +29,33 @@ class Album extends React.Component {
       artist: cd.artistName,
       collection: cd.collectionName,
     });
+    // Recuperação das músicas favoritas
+    const favorite = await getFavoriteSongs();
+    console.log(favorite);
+    this.setState({
+      loading: false,
+      favoriteSongs: favorite,
+    });
   }
 
   render() {
-    const { music, artist, collection } = this.state;
+    const { music, artist, collection, loading, favoriteSongs } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
-        <h2 data-testid="artist-name">{artist}</h2>
-        <h3 data-testid="album-name">{collection}</h3>
-        {music.map((song, index) => <MusicCard key={ index } { ...song } />)}
+        { loading ? (
+          <Loading />
+        ) : (
+          <>
+            <h2 data-testid="artist-name">{artist}</h2>
+            <h3 data-testid="album-name">{collection}</h3>
+            {music.map((song, index) => (<MusicCard
+              key={ index }
+              { ...song }
+              favoriteSongs={ favoriteSongs }
+            />))}
+          </>
+        )}
       </div>
     );
   }
