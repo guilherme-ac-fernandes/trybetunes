@@ -38,13 +38,18 @@ class MusicCard extends React.Component {
       });
     } else {
       // Remove música das favoritas
+      const { favoriteSection, getFavorite } = this.props;
       this.setState({
         loading: true,
-      });
-      await removeSong(songObject);
-      this.setState({
-        loading: false,
-        checked: false,
+      }, async () => {
+        await removeSong(songObject);
+        if (favoriteSection) {
+          await getFavorite();
+        }
+        this.setState({
+          loading: false,
+          checked: false,
+        });
       });
     }
   }
@@ -52,7 +57,6 @@ class MusicCard extends React.Component {
   render() {
     const { trackName, previewUrl, trackId } = this.props;
     const { loading, checked } = this.state;
-
     return (
       <div>
         { loading && <Loading />}
@@ -76,7 +80,6 @@ class MusicCard extends React.Component {
           />
         </label>
       </div>
-
     );
   }
 }
@@ -86,6 +89,8 @@ MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   favoriteSongs: PropTypes.arrayOf(PropTypes.number).isRequired,
+  favoriteSection: PropTypes.bool.isRequired,
+  getFavorite: PropTypes.func.isRequired,
 };
 
 export default MusicCard;

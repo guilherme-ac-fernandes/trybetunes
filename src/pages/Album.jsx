@@ -41,9 +41,11 @@ class Album extends React.Component {
     });
   }
 
+  // Função sem necessidade funcional, apenas para corrigir problemas com o linter e a reutilização deste componente
+  getFavorite = () => {};
+
   render() {
     const { music, artist, collection, loading, favoriteSongs } = this.state;
-    // console.log(favoriteSongs.map((fav) => fav.trackId));
     return (
       <div data-testid="page-album">
         <Header />
@@ -56,7 +58,9 @@ class Album extends React.Component {
             {music.map((song, index) => (<MusicCard
               key={ index }
               { ...song }
-              favoriteSongs={ favoriteSongs.map((fav) => fav.trackId) }
+              favoriteSection={ false }
+              getFavorite={ this.getFavorite }
+              favoriteSongs={ favoriteSongs.map((fav) => Number(fav.trackId)) }
             />))}
           </>
         )}
