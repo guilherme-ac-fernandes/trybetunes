@@ -27,7 +27,9 @@ class CdDisplay extends React.Component {
         <Link
           to={ `/album/${collectionId}` }
           data-testid={ `link-to-album-${collectionId}` }
-        />
+        >
+          Mostrar músicas
+        </Link>
       </div>
     );
   }
