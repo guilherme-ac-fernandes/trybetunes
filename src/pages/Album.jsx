@@ -17,9 +17,8 @@ class Album extends React.Component {
   async componentDidMount() {
     const { match: { params: { id } } } = this.props;
     const objectMusic = await getMusics(id);
-    const cd = objectMusic.filter((_, index) => index === 0);
+    const cd = (objectMusic.filter((_, index) => index === 0))[0];
     const songs = objectMusic.filter((_, index) => index !== 0);
-    console.log(cd);
     this.setState({
       music: songs,
       artist: cd.artistName,
@@ -29,7 +28,6 @@ class Album extends React.Component {
 
   render() {
     const { music, artist, collection } = this.state;
-    console.log(artist);
     return (
       <div data-testid="page-album">
         <Header />
