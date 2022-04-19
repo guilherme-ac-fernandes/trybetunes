@@ -18,7 +18,11 @@ class Album extends React.Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.handleChangeFromSimulationAPI();
+  }
+
+  handleChangeFromSimulationAPI = async () => {
     // Busca da informação do album selecionado
     const { match: { params: { id } } } = this.props;
     const objectMusic = await getMusics(id);
@@ -31,7 +35,6 @@ class Album extends React.Component {
     });
     // Recuperação das músicas favoritas
     const favorite = await getFavoriteSongs();
-    console.log(favorite);
     this.setState({
       loading: false,
       favoriteSongs: favorite,
@@ -40,6 +43,7 @@ class Album extends React.Component {
 
   render() {
     const { music, artist, collection, loading, favoriteSongs } = this.state;
+    // console.log(favoriteSongs.map((fav) => fav.trackId));
     return (
       <div data-testid="page-album">
         <Header />
@@ -52,7 +56,7 @@ class Album extends React.Component {
             {music.map((song, index) => (<MusicCard
               key={ index }
               { ...song }
-              favoriteSongs={ favoriteSongs }
+              favoriteSongs={ favoriteSongs.map((fav) => fav.trackId) }
             />))}
           </>
         )}
