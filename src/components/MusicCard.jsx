@@ -30,11 +30,12 @@ class MusicCard extends React.Component {
       // Adição de uma música das favoritas
       this.setState({
         loading: true,
-      });
-      await addSong(songObject);
-      this.setState({
-        loading: false,
-        checked: true,
+      }, async () => {
+        await addSong(songObject);
+        this.setState({
+          loading: false,
+          checked: true,
+        });
       });
     } else {
       // Remove música das favoritas
