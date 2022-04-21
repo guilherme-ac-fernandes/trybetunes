@@ -8,15 +8,19 @@ class Profile extends React.Component {
   constructor() {
     super();
     this.state = {
+      // Estado que recebe a informação do usuário (inicia como true porque espera o recebimento da promise para desaparecer)
       loading: true,
+      // Objeto no estado para armazenar os dados do usuário
       user: {},
     };
   }
 
+  // A função será executado no mesmo momento do componente DidMount
   componentDidMount() {
     this.getUserInfo();
   }
 
+  // Função recebe os dados do usuário, faz o gerenciamento do carregamento e atualiza o objeto no estado
   getUserInfo = async () => {
     this.setState({
       loading: true,

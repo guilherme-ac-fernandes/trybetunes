@@ -8,20 +8,24 @@ class Favorites extends React.Component {
   constructor() {
     super();
     this.state = {
+      // Estado que recebe a informação do usuário (inicia como true porque espera o recebimento da promise para desaparecer)
       loading: true,
+      // Estado que contém as músicas favoritas
       favorite: [],
     };
   }
 
+  // A função será executado no mesmo momento do componente DidMount
   componentDidMount() {
     this.getFavorite();
   }
 
+  // Função que recupera as músicas presente no LocalStorage como músicas favoritas
   getFavorite = async () => {
     const favoriteArray = await getFavoriteSongs();
     this.setState({
-      loading: false,
-      favorite: favoriteArray,
+      loading: false, // Remove o carregamento
+      favorite: favoriteArray, // Atualiza o array de músicas favoritas
     });
   }
 
@@ -43,6 +47,7 @@ class Favorites extends React.Component {
               getFavorite={ this.getFavorite }
               favoriteSongs={ favorite.map((favId) => Number(favId.trackId)) }
             />))}
+            {/* A aplicação da função Number() é para corrigir o retorno encontrado na validação do PropTypes pelos dados provenientes do teste - Estava retornado number e string */}
           </>
         )}
       </div>

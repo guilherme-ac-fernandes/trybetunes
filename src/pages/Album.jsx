@@ -10,38 +10,48 @@ class Album extends React.Component {
   constructor() {
     super();
     this.state = {
+      // Array que contém todas as músicas do artista/banda
       music: [],
+      // Nome do artista/banda
       artist: '',
+      // Nome do disco
       collection: '',
+      // Estado que gerenciona o carregamento na tela
       loading: true,
+      // Array que contém apenas as músicas favoritadas
       favoriteSongs: [],
     };
   }
 
+  // A função será executado no mesmo momento do componente DidMount
   componentDidMount() {
     this.handleChangeFromSimulationAPI();
   }
 
+  // Função que recebe as informações do disco do artista/banda
   handleChangeFromSimulationAPI = async () => {
-    // Busca da informação do album selecionado
+    // Props criada pelo componente Route que contém a informação presente na URL
     const { match: { params: { id } } } = this.props;
+    // Retorno da API que contém as informações do disco
     const objectMusic = await getMusics(id);
+    // O primeiro elemento do array retornado pela API é as informações do disco, essa constante filtra apenas esse elemento
     const cd = (objectMusic.filter((_, index) => index === 0))[0];
+    // Os demais elementos do array retornado da API são todas as músicas presentes. A constante abaixo filtra removendo apenas o primeiro elemento do array
     const songs = objectMusic.filter((_, index) => index !== 0);
     this.setState({
-      music: songs,
-      artist: cd.artistName,
-      collection: cd.collectionName,
+      music: songs, // Adiciona no estado todas as músicas do disco em questão
+      artist: cd.artistName, // Atualização do estado que contém o nome do artista
+      collection: cd.collectionName, // Atualização do estado que contém o nome do disco
     });
-    // Recuperação das músicas favoritas
+    // Recuperação das músicas favoritas no LocalStorage
     const favorite = await getFavoriteSongs();
     this.setState({
       loading: false,
-      favoriteSongs: favorite,
+      favoriteSongs: favorite, // Atualiza o array de músicas favoritas
     });
   }
 
-  // Função sem necessidade funcional, apenas para corrigir problemas com o linter e a reutilização deste componente
+  // Função sem necessidade operacional, apenas para corrigir problemas com o linter e a reutilização deste componente
   getFavorite = () => {};
 
   render() {
@@ -62,6 +72,7 @@ class Album extends React.Component {
               getFavorite={ this.getFavorite }
               favoriteSongs={ favoriteSongs.map((fav) => Number(fav.trackId)) }
             />))}
+            {/* A aplicação da função Number() é para corrigir o retorno encontrado na validação do PropTypes pelos dados provenientes do teste - Estava retornado number e string */}
           </>
         )}
       </div>

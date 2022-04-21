@@ -7,15 +7,12 @@ import Profile from './pages/Profile';
 import Search from './pages/Search';
 import Login from './pages/Login';
 import Album from './pages/Album';
-import { createUser } from './services/userAPI';
+import './App.css';
 
 class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <p>
-          TrybeTunes
-        </p>
         <Switch>
           <Route path="/search" render={ () => <Search /> } />
           <Route path="/album/:id" render={ (props) => <Album { ...props } /> } />
@@ -28,7 +25,7 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            render={ (props) => <Login { ...props } createUser={ createUser } /> }
+            render={ (props) => <Login { ...props } /> }
           />
           <Route path="*" render={ () => <NotFound /> } />
         </Switch>

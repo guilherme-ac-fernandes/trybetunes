@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 class CdDisplay extends React.Component {
   render() {
+    // Recebe as props (com as devidas validações) do componente Pai e renderiza na página no formato apresentado no retorno
     const {
       artistId,
       artistName,

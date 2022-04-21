@@ -8,18 +8,29 @@ class ProfileEdit extends React.Component {
   constructor() {
     super();
     this.state = {
-      loading: true,
-      name: '',
-      email: '',
-      image: '',
-      description: '',
+      loading: true, // Estado que recebe a informação do usuário
+      name: '', // Estado que contém os dados do input name
+      email: '', // Estado que contém os dados do input email
+      image: '', // Estado que contém os dados do input image
+      description: '', // Estado que contém os dados do input description
     };
   }
 
+  // A função será executado no mesmo momento do componente DidMount
   componentDidMount() {
     this.updateUserInfo();
   }
 
+  // Função genérica que lida com as informações do formulário
+  handleChange = ({ target }) => {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  // Função que atualiza os dados do usuário no LocalStorage, faz o gerenciamento do carregamento e atualizada o estado (antes da página ser renderizada, porque é chamado no componenteDidMount)
   updateUserInfo = async () => {
     this.setState({
       loading: true,
@@ -35,22 +46,17 @@ class ProfileEdit extends React.Component {
     });
   }
 
-  handleChange = ({ target }) => {
-    const { name } = target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    });
-  }
-
+  // Função a ser executada ao clicar no botão
   handleClick = async () => {
+    // Recebe os dados do usuário do estado e cria um objeto
     const { name, email, image, description } = this.state;
     const updatedUser = { name, email, image, description };
+    // Abaixo contém : o gerenciamento do carregamento, a função que retorna uma promise contendo a atualização dos dados do usuário e o redirect para a página de profile
     this.setState({
       loading: true,
     }, async () => {
       await updateUser(updatedUser);
-      // Não precisei colocar um loading para false porque já altera a página
+      // Observação: Não precisei colocar um loading para false porque já altera a página
       const { history } = this.props;
       history.push('/profile');
     });
@@ -58,17 +64,23 @@ class ProfileEdit extends React.Component {
 
   render() {
     const { loading, name, email, image, description } = this.state;
+    // Constante contendo todas as validações dos inputs
     const validation = {
       name: name.length > 0,
       email: email.length > 0,
       // Resolução para verificação do email proveniente do exercício realizado durante o bloco 11 (link: https://github.com/guilherme-ac-fernandes/trybe-exercicios/blob/main/02-front-end/bloco-11-componentes-com-estado-eventos-e-formularios-com-react/dia-02-formularios-no-react/exercise-01/src/App.jsx)
       // Onde, [^\s@] sigifica qualquer string
+      // ^ e $ = no começo e no final, respectivamente
+      // \s = encontra correspondência com um único caractere de espaço em branco
+      // @ = engloba todos os caracteres comuns
+      // \. = \ remove a expressão do ponto porque o ponto significa qualquer caracter
       // A verificação é feita por: anystring@anystring.anystring
-      // !! foi correção do linter ao aplicar um ternário
+      // !! foi correção do linter ao aplicar um ternário => Operação que converte um thuthy ou falsy em true ou false
       emailString: (!!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)),
       image: image.length > 0,
       description: description.length > 0,
     };
+    // Constante que recebe valores booleanos, se todos as validações no objeto acima forem true o botão é habilitado
     const buttonDisabled = Object.values(validation).every((item) => item === true);
     return (
       <div data-testid="page-profile-edit">
