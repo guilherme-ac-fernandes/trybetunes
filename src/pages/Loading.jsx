@@ -4,7 +4,7 @@ class Loading extends React.Component {
   render() {
     // Componente de carregamento
     return (
-      <p>Carregando...</p>
+      <div>Carregando...</div>
     );
   }
 }

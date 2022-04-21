@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Loading from './Loading';
 import logo from '../image/logo-trybetunes.svg';
 import { createUser } from '../services/userAPI';
+import styles from './Login.module.css';
 
 class Login extends React.Component {
   constructor() {
@@ -41,11 +42,11 @@ class Login extends React.Component {
     const { login, loading } = this.state;
     const loginMinLength = 3; // Constante que armazena o número minímo de caracteres no input login para habilitar o botão
     return (
-      <section>
+      <section className={ styles.container }>
         <img src={ logo } alt="logo TrybeTunes" />
         <section>
           {loading ? (
-            <Loading />
+            <div><Loading /></div>
           ) : (
             <form data-testid="page-login">
               <label htmlFor="login-name-input">
