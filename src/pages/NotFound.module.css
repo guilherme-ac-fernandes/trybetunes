@@ -1,0 +1,29 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.container img {
+  margin-bottom: 80px;
+  margin-top: 80px;
+}
+
+.container section {
+  display: flex;
+}
+
+.container section h1 {
+  color: #023031;
+  font-family: Epilogue , sans-serif;
+  font-size: 200px;
+  margin-right: 80px;
+  width: 400px;
+}
+
+.container section p {
+  color: #023031;
+  font-family: Epilogue , sans-serif;
+  font-size: 60px;
+  width: 500px;
+}

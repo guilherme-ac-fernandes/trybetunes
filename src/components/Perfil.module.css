@@ -1,0 +1,24 @@
+.container {
+  align-items: center;
+  background-color: #2fc18c;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 36.4px;
+  justify-content: space-evenly;
+  width: 36.4px;
+}
+
+.container span {
+  background-color: #dadada;
+  border-radius: 50px;
+  height: 10.93px;
+  width: 10.93px;
+}
+
+.container aside {
+  background-color: #dadada;
+  border-radius: 50px;
+  height: 11.48px;
+  width: 21.87px;
+}

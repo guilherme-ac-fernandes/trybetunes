@@ -5,6 +5,7 @@
   --dark-green: #023031;
   --light-green: #036B52;
   --white: white;
+  background-color: var(--main-color);
 }
 
 /* Mínimo do Reset de CSS proveniente do Digital Ocean (link: https://www.digitalocean.com/community/tutorials/css-minimal-css-reset) */
@@ -31,4 +32,3 @@ img {
   max-width: 100%;
   height: auto;
 }
-

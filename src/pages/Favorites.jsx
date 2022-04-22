@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 import MusicCard from '../components/MusicCard';
+import styles from './Favorites.module.css';
 
 class Favorites extends React.Component {
   constructor() {
@@ -34,22 +35,24 @@ class Favorites extends React.Component {
     return (
       <div data-testid="page-favorites">
         <Header />
-        { loading ? (
-          <Loading />
-        ) : (
-          <>
-            {favorite.map((fav, index) => (<MusicCard
-              key={ `fav${index}` }
-              trackId={ Number(fav.trackId) }
-              trackName={ fav.trackName }
-              previewUrl={ fav.previewUrl }
-              favoriteSection
-              getFavorite={ this.getFavorite }
-              favoriteSongs={ favorite.map((favId) => Number(favId.trackId)) }
-            />))}
-            {/* A aplicação da função Number() é para corrigir o retorno encontrado na validação do PropTypes pelos dados provenientes do teste - Estava retornado number e string */}
-          </>
-        )}
+        <div className={ styles.container }>
+          { loading ? (
+            <aside><Loading /></aside>
+          ) : (
+            <section>
+              {favorite.map((fav, index) => (<MusicCard
+                key={ `fav${index}` }
+                trackId={ Number(fav.trackId) }
+                trackName={ fav.trackName }
+                previewUrl={ fav.previewUrl }
+                favoriteSection
+                getFavorite={ this.getFavorite }
+                favoriteSongs={ favorite.map((favId) => Number(favId.trackId)) }
+              />))}
+              {/* A aplicação da função Number() é para corrigir o retorno encontrado na validação do PropTypes pelos dados provenientes do teste - Estava retornado number e string */}
+            </section>
+          )}
+        </div>
       </div>
     );
   }

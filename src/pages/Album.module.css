@@ -1,0 +1,35 @@
+.container section {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.container main {
+  color: #023031;
+  font-family: Epilogue , sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 65px;
+  margin-top: 130px;
+  text-align: center;
+}
+
+.container section aside {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  line-height: 30px;
+  min-width: 200px;
+}
+
+.container section aside img {
+  margin-bottom: 20px;
+}
+
+.container section section {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

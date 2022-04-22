@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
 import CdDisplay from '../components/CdDisplay';
+import styles from './Search.module.css';
 
 class Search extends React.Component {
   constructor() {
@@ -37,7 +38,7 @@ class Search extends React.Component {
         loading: false, // Remove o carregamento da página
         returnArrayCd: arrayCds, // Atualiza o array de discos
         result: true, // Informa que os dados foram válidos e que pode ser renderizado
-        searchInfo: artist, // Armazena o nome do artista/banda pesquisada
+        searchInfo: artist[0].toUpperCase() + artist.slice(1), // Armazena o nome do artista/banda pesquisada
         notValid: false, // Mantém o estado de validação como false
       });
     } else { // Caso contrário (array não conter elementos)
@@ -55,39 +56,46 @@ class Search extends React.Component {
     return (
       <div data-testid="page-search">
         <Header />
-        <div>
-          {!loading ? (
-            <form>
-              <input
-                type="text"
-                data-testid="search-artist-input"
-                placeholder="Which artist do you want to search?"
-                name="artist"
-                value={ artist }
-                onChange={ this.handleChange }
-              />
-              <button
-                type="button"
-                data-testid="search-artist-button"
-                disabled={ artist.length < loginMinLength }
-                onClick={ this.handleClick }
-              >
-                Pesquisar
-              </button>
-            </form>
-          ) : (
-            <Loading />
-          ) }
-        </div>
-        {result && (
-          <section>
-            <p>{`Resultado de álbuns de: ${searchInfo}`}</p>
-            <div>
-              {returnArrayCd.map((cd) => <CdDisplay key={ cd.collectionId } { ...cd } />)}
-            </div>
-          </section>
-        )}
-        <div>{notValid && <p>Nenhum álbum foi encontrado</p>}</div>
+        <main className={ styles.container }>
+          <div>
+            {!loading ? (
+              <form>
+                <input
+                  type="text"
+                  data-testid="search-artist-input"
+                  placeholder="Which artist do you want to search?"
+                  name="artist"
+                  value={ artist }
+                  onChange={ this.handleChange }
+                />
+                <button
+                  type="button"
+                  data-testid="search-artist-button"
+                  disabled={ artist.length < loginMinLength }
+                  onClick={ this.handleClick }
+                >
+                  Pesquisar
+                </button>
+              </form>
+            ) : (
+              <aside><Loading /></aside>
+            ) }
+          </div>
+          {result && (
+            <section>
+              <p>{`Resultado de álbuns de: ${searchInfo}`}</p>
+              <div>
+                {returnArrayCd.map((cd) => (<CdDisplay
+                  key={ cd.collectionId }
+                  { ...cd }
+                />))}
+              </div>
+            </section>
+          )}
+          <div>{notValid && <p>Nenhum álbum foi encontrado</p>}</div>
+
+        </main>
+
       </div>
     );
   }

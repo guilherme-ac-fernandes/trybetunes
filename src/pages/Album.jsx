@@ -5,6 +5,7 @@ import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Loading from './Loading';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import styles from './Album.module.css';
 
 class Album extends React.Component {
   constructor() {
@@ -16,6 +17,8 @@ class Album extends React.Component {
       artist: '',
       // Nome do disco
       collection: '',
+      // Imagem do disco
+      image: '',
       // Estado que gerenciona o carregamento na tela
       loading: true,
       // Array que contém apenas as músicas favoritadas
@@ -41,6 +44,7 @@ class Album extends React.Component {
     this.setState({
       music: songs, // Adiciona no estado todas as músicas do disco em questão
       artist: cd.artistName, // Atualização do estado que contém o nome do artista
+      image: cd.artworkUrl100,
       collection: cd.collectionName, // Atualização do estado que contém o nome do disco
     });
     // Recuperação das músicas favoritas no LocalStorage
@@ -55,26 +59,35 @@ class Album extends React.Component {
   getFavorite = () => {};
 
   render() {
-    const { music, artist, collection, loading, favoriteSongs } = this.state;
+    const { music, artist, collection, image, loading, favoriteSongs } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
-        { loading ? (
-          <Loading />
-        ) : (
-          <>
-            <h2 data-testid="artist-name">{artist}</h2>
-            <h3 data-testid="album-name">{collection}</h3>
-            {music.map((song, index) => (<MusicCard
-              key={ index }
-              { ...song }
-              favoriteSection={ false }
-              getFavorite={ this.getFavorite }
-              favoriteSongs={ favoriteSongs.map((fav) => Number(fav.trackId)) }
-            />))}
-            {/* A aplicação da função Number() é para corrigir o retorno encontrado na validação do PropTypes pelos dados provenientes do teste - Estava retornado number e string */}
-          </>
-        )}
+        <div className={ styles.container }>
+          { loading ? (
+            <main><Loading /></main>
+          ) : (
+            <section>
+              <aside>
+                <img src={ image } alt={ `${collection} disco` } />
+                <h2 data-testid="artist-name">{artist}</h2>
+                <h3 data-testid="album-name">{collection}</h3>
+              </aside>
+              <section>
+                {music.map((song, index) => (<MusicCard
+                  key={ index }
+                  { ...song }
+                  favoriteSection={ false }
+                  getFavorite={ this.getFavorite }
+                  favoriteSongs={ favoriteSongs.map((fav) => Number(fav.trackId)) }
+                />))}
+                {/* A aplicação da função Number() é para corrigir o retorno encontrado na validação do PropTypes pelos dados provenientes do teste - Estava retornado number e string */}
+              </section>
+            </section>
+          )}
+
+        </div>
+
       </div>
     );
   }

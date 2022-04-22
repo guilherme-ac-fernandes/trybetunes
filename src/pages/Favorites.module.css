@@ -1,0 +1,17 @@
+.container section {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.container aside {
+  color: #023031;
+  font-family: Epilogue , sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 65px;
+  margin-top: 130px;
+  text-align: center;
+}

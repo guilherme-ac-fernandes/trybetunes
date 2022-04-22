@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
+import styles from './MusicCard.module.css';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -68,28 +69,36 @@ class MusicCard extends React.Component {
     // Estados que serão capazes de realizar as comportamentos necessários da página
     const { loading, checked } = this.state;
     return (
-      <div>
-        { loading && <Loading />}
-        <p>{trackName}</p>
-        <audio data-testid="audio-component" src={ previewUrl } controls>
-          <track kind="captions" />
-          O seu navegador não suporta o elemento
-          {' '}
-          <code>audio</code>
-          .
-        </audio>
-        <label htmlFor={ `checkbox-music-${trackId}` }>
-          Favorita
-          <input
-            type="checkbox"
-            name="favorite"
-            id={ `checkbox-music-${trackId}` }
-            data-testid={ `checkbox-music-${trackId}` }
-            onChange={ () => this.handleChange(this.props) }
-            checked={ checked }
-          />
-        </label>
-      </div>
+      <section className={ styles.container }>
+        <div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <section>
+              <p>{trackName}</p>
+              <audio data-testid="audio-component" src={ previewUrl } controls>
+                <track kind="captions" />
+                O seu navegador não suporta o elemento
+                {' '}
+                <code>audio</code>
+                .
+              </audio>
+              <label htmlFor={ `checkbox-music-${trackId}` }>
+                Favorita
+                <input
+                  type="checkbox"
+                  name="favorite"
+                  id={ `checkbox-music-${trackId}` }
+                  data-testid={ `checkbox-music-${trackId}` }
+                  onChange={ () => this.handleChange(this.props) }
+                  checked={ checked }
+                />
+              </label>
+            </section>
+          )}
+        </div>
+
+      </section>
     );
   }
 }
