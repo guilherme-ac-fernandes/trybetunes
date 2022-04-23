@@ -24,7 +24,6 @@
 
 .container input {
   background: var(--white);
-  background-color: #3d495c;
   border: 1px solid #e1e5eb;
   outline: none;
   padding: 12px 16px;

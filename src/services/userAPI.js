@@ -30,7 +30,7 @@ export const createUser = (user) => new Promise((resolve) => {
   const emptyUser = {
     name: '',
     email: '',
-    image: '',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqZTrzAB4Dx6G__8N_tifYN8TJ9GZ2WX8iGK6FsM-I4OEOwsFYKkihpU6SQ-XNED-UCtw&usqp=CAU',
     description: '',
   };
   saveUser({ ...emptyUser, ...user });
