@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 50px;
+  margin: 10px;
 }
 
 .container div form {
@@ -40,6 +40,8 @@
   font-family: Epilogue , sans-serif;
   font-size: 30px;
   font-weight: 300;
+  margin-bottom: 30px;
+  margin-top: 30px;
   text-align: center;
 }
 

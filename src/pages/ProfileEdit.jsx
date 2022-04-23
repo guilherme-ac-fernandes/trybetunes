@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { getUser, updateUser } from '../services/userAPI';
 import Loading from './Loading';
+import styles from './ProfileEdit.module.css';
 
 class ProfileEdit extends React.Component {
   constructor() {
@@ -85,64 +86,66 @@ class ProfileEdit extends React.Component {
     return (
       <div data-testid="page-profile-edit">
         <Header />
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            <label htmlFor="edit-input-image">
-              <h3>Imagem</h3>
-              <input
-                type="text"
-                name="image"
-                value={ image }
-                id="edit-input-image"
-                data-testid="edit-input-image"
-                onChange={ this.handleChange }
-              />
-            </label>
-            <label htmlFor="edit-input-name">
-              <h3>Nome</h3>
-              <input
-                type="text"
-                name="name"
-                value={ name }
-                id="edit-input-name"
-                data-testid="edit-input-name"
-                onChange={ this.handleChange }
-              />
-            </label>
-            <label htmlFor="edit-input-email">
-              <h3>E-mail</h3>
-              <input
-                type="text"
-                name="email"
-                value={ email }
-                id="edit-input-email"
-                data-testid="edit-input-email"
-                onChange={ this.handleChange }
-              />
-            </label>
-            <label htmlFor="edit-input-description">
-              <h3>Descrição</h3>
-              <input
-                type="text"
-                name="description"
-                value={ description }
-                id="edit-input-description"
-                data-testid="edit-input-description"
-                onChange={ this.handleChange }
-              />
-            </label>
-            <button
-              type="button"
-              data-testid="edit-button-save"
-              disabled={ !buttonDisabled }
-              onClick={ this.handleClick }
-            >
-              Salvar
-            </button>
-          </>
-        )}
+        <section className={ styles.container }>
+          {loading ? (
+            <aside><Loading /></aside>
+          ) : (
+            <div>
+              <label htmlFor="edit-input-image">
+                <h3>Imagem</h3>
+                <input
+                  type="text"
+                  name="image"
+                  value={ image }
+                  id="edit-input-image"
+                  data-testid="edit-input-image"
+                  onChange={ this.handleChange }
+                />
+              </label>
+              <label htmlFor="edit-input-name">
+                <h3>Nome</h3>
+                <input
+                  type="text"
+                  name="name"
+                  value={ name }
+                  id="edit-input-name"
+                  data-testid="edit-input-name"
+                  onChange={ this.handleChange }
+                />
+              </label>
+              <label htmlFor="edit-input-email">
+                <h3>E-mail</h3>
+                <input
+                  type="text"
+                  name="email"
+                  value={ email }
+                  id="edit-input-email"
+                  data-testid="edit-input-email"
+                  onChange={ this.handleChange }
+                />
+              </label>
+              <label htmlFor="edit-input-description">
+                <h3>Descrição</h3>
+                <input
+                  type="text"
+                  name="description"
+                  value={ description }
+                  id="edit-input-description"
+                  data-testid="edit-input-description"
+                  onChange={ this.handleChange }
+                />
+              </label>
+              <button
+                type="button"
+                data-testid="edit-button-save"
+                disabled={ !buttonDisabled }
+                onClick={ this.handleClick }
+              >
+                Salvar
+              </button>
+            </div>
+          )}
+        </section>
       </div>
     );
   }

@@ -1,0 +1,76 @@
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.container div {
+  border: 1px solid #e1e5eb;
+  display: flex;
+  flex-direction: column;
+  height: 550px;
+  line-height: 40px;
+  margin-top: 40px;
+  width: 450px;
+}
+
+.container div aside img {
+  border: 1px solid #e1e5eb;
+  border-radius: 100%;
+  height: 150px;
+  margin: 20px;
+  object-fit: cover;
+  width: 150px;
+}
+
+.container div aside {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.container h3 {
+  color: #3d495c;
+  font-family: Verdana , sans-serif;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.container p {
+  color: #3d495c;
+  font-family: Verdana , sans-serif;
+  margin: 0 auto;
+
+  /* Quebra de linha proveniente do Stack OverFlow
+  (link: https://stackoverflow.com/questions/13790170/
+  p-when-text-exceeds-width-continue-in-new-line) */
+  width: 80%;
+  word-break: break-all;
+}
+
+.container ul {
+  align-items: center;
+  border: 1px solid #003be5;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #003be5;
+  display: flex;
+  flex-direction: row;
+  font-family: Verdana , sans-serif;
+  height: 32px;
+  justify-content: center;
+  padding: 7px 16px;
+  text-decoration: none;
+  width: 129px;
+}
+
+.container form {
+  color: #023031;
+  font-family: Epilogue , sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 30px;
+  margin-top: 50px;
+  text-align: center;
+}
