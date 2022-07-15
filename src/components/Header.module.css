@@ -42,7 +42,7 @@
 .container nav ul li {
   align-items: center;
   background-color: #f0f2f5;
-  color: #2fc18c;
+  
   display: flex;
   font-family: Epilogue , sans-serif;
   font-size: 20px;
@@ -54,7 +54,15 @@
   width: 33%;
 }
 
+.container nav ul li a {
+  color: #2fc18c;
+  text-decoration: none;
+}
+
 .container nav ul li:hover {
   background-color: var(--light-green);
+}
+
+.container nav ul li a:hover {
   color: var(--white);
 }
