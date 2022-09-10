@@ -18,5 +18,5 @@ npm start // para iniciar a aplicação
 👨🏻‍💻 **Acessar:** _[Clique Aqui](https://trybetunes-tau.vercel.app)_
 
 <p align="center">
-  <img src="" alt="Trybetunes Gif - Demostração"/>
+  <img src="https://github.com/guilherme-ac-fernandes/trybetunes/blob/main/trybetunes.png" alt="Trybetunes Gif - Demostração"/>
 </p>
